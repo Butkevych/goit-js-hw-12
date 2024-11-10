@@ -18,6 +18,7 @@ form.addEventListener('submit', async event => {
   event.preventDefault();
 
   const query = event.target.elements.query.value.trim();
+  document.querySelector('.gallery').innerHTML = '';
   if (!query) {
     toggleLoader(false);
     iziToast.error({

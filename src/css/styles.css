@@ -50,31 +50,36 @@ button:hover {
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 24px;
-  column-gap: 24px;
+  row-gap: 16px;
+  column-gap: 16px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 28px;
 }
 .image-card {
   border: 1px solid #808080;
   height: 200px;
+  width: 240px;
 }
 img {
-  width: 360px;
+  width: 240px;
   height: 152px;
 }
 .img-details {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 28px;
+  gap: 16px;
   padding: 4px 0;
+  width: 100%;
 }
 .coms {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 240px;
+  font-size: 12px;
 }
 .coms p {
   font-weight: 700;
@@ -111,4 +116,10 @@ img {
   100% {
     transform: rotate(360deg);
   }
+}
+.loadMore {
+  display: block;
+  margin: 0 auto;
+  width: 125px;
+  height: 40px;
 }

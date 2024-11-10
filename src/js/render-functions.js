@@ -10,7 +10,6 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 export function renderImages(images) {
   const galleryElement = document.querySelector('.gallery');
-  galleryElement.innerHTML = '';
 
   const imagesSet = images
     .map(image => {
@@ -29,7 +28,7 @@ export function renderImages(images) {
     `;
     })
     .join('');
-  galleryElement.innerHTML = imagesSet;
+  galleryElement.insertAdjacentHTML('beforeend', imagesSet);
 
   lightbox.refresh();
 }
