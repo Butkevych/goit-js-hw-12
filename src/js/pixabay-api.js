@@ -13,7 +13,7 @@ function toggleLoader(isLoading) {
 }
 toggleButton(false);
 function toggleButton(isVisible) {
-  const button = document.querySelector('.loadMore');
+  const button = document.querySelector('.load-more');
 
   if (isVisible) {
     button.style.display = 'block';
@@ -56,7 +56,7 @@ export async function fetchImages(
   }
 }
 
-const morePictures = document.querySelector('.loadMore');
+const morePictures = document.querySelector('.load-more');
 morePictures.addEventListener('click', async () => {
   const query = document
     .querySelector('#form input[name="query"]')

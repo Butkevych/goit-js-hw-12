@@ -117,7 +117,7 @@ img {
     transform: rotate(360deg);
   }
 }
-.loadMore {
+.load-more {
   display: block;
   margin: 0 auto;
   width: 125px;
