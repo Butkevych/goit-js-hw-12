@@ -41,7 +41,7 @@ form.addEventListener('submit', async event => {
 
   try {
     const data = await fetchImages(query, page, perPage);
-    if (page >= data.totalHits / 15) {
+    if (data.hits.length === 0) {
       morePictures.disabled = false;
 
       iziToast.error({
@@ -73,7 +73,7 @@ morePictures.addEventListener('click', async () => {
     renderImages(data.hits);
     toggleLoader(false);
 
-    if (page >= data.totalHits / 15) {
+    if (data.hits.length < 15 || page >= data.totalHits / 15) {
       morePictures.disabled = false;
 
       iziToast.info({
