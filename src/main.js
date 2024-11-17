@@ -5,7 +5,7 @@ import { renderImages, renderError } from './js/render-functions.js';
 
 let query = '';
 let page = 1;
-let perPage = 20;
+let perPage = 15;
 
 function toggleLoader(isLoading) {
   const loader = document.getElementById('loader');
@@ -40,7 +40,7 @@ form.addEventListener('submit', async event => {
   }
 
   try {
-    const data = await fetchImages(query, page);
+    const data = await fetchImages(query, page, perPage);
     if (page >= data.totalHits / 15) {
       morePictures.disabled = false;
 
@@ -55,6 +55,8 @@ form.addEventListener('submit', async event => {
       renderImages(data.hits);
       toggleLoader(false);
       toggleLoadMoreButton(true);
+
+      smoothScroll();
     }
   } catch (error) {
     renderError(error);
@@ -67,7 +69,7 @@ morePictures.addEventListener('click', async () => {
   toggleLoader(true);
 
   try {
-    const data = await fetchImages(query, page, (perPage = 15));
+    const data = await fetchImages(query, page, perPage);
     renderImages(data.hits);
     toggleLoader(false);
 
@@ -83,7 +85,21 @@ morePictures.addEventListener('click', async () => {
     } else {
       toggleLoadMoreButton(true);
     }
+
+    smoothScroll();
   } catch (error) {
     renderError(error);
   }
 });
+
+function smoothScroll() {
+  const firstImageCard = document.querySelector('.image-card');
+  if (firstImageCard) {
+    const cardHeight = firstImageCard.getBoundingClientRect().height;
+    window.scrollBy({
+      top: cardHeight * 2,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+}
