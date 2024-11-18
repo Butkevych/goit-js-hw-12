@@ -41,8 +41,14 @@ form.addEventListener('submit', async event => {
 
   try {
     const data = await fetchImages(query, page, perPage);
-    if (data.hits.length === 0) {
-      morePictures.disabled = false;
+    renderImages(data.hits);
+    toggleLoader(false);
+    toggleLoadMoreButton(true);
+
+    smoothScroll();
+
+    if (data.hits.length === 0 || page >= data.totalHits / 15) {
+      toggleLoadMoreButton(false);
 
       iziToast.error({
         title: 'Sorry,',
@@ -51,12 +57,6 @@ form.addEventListener('submit', async event => {
         position: 'topRight',
         timeout: 3000,
       });
-    } else {
-      renderImages(data.hits);
-      toggleLoader(false);
-      toggleLoadMoreButton(true);
-
-      smoothScroll();
     }
   } catch (error) {
     renderError(error);
@@ -73,8 +73,8 @@ morePictures.addEventListener('click', async () => {
     renderImages(data.hits);
     toggleLoader(false);
 
-    if (data.hits.length < 15 || page >= data.totalHits / 15) {
-      morePictures.disabled = false;
+    if (page >= data.totalHits / 15) {
+      toggleLoadMoreButton(false);
 
       iziToast.info({
         title: "We're sorry,",
